@@ -11,8 +11,8 @@ const apiClient = axios.create({
 });
 
 export default {
-  getEntries() {
-    return apiClient.get("/entries");
+  getEntries(perPage, page) {
+    return apiClient.get("/entries?_limit=" + perPage + "&_page=" + page);
   },
   addEntry(entry) {
     return apiClient.post("/entries/", entry);

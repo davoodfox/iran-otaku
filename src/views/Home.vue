@@ -9,15 +9,11 @@
     </form>
     <div>
       <Spinner v-if="isLoading()" />
-      <p v-if="isLoading()">در حال جستجوی {{ this.$store.state.query }}</p>
-      <template v-if="!isLoading() && this.$store.state.results.length != 0">
-        <p>نتایج جستجو برای {{ this.$store.state.query }}:</p>
+      <p v-if="isLoading()">در حال جستجوی {{ query }}</p>
+      <template v-if="!isLoading() && results.length != 0">
+        <p>نتایج جستجو برای {{ query }}:</p>
         <ul>
-          <card
-            v-for="result in this.$store.state.results"
-            :key="result.mal_id"
-            :directive="result"
-          ></card>
+          <card v-for="result in results" :key="result.mal_id" :directive="result"></card>
         </ul>
       </template>
     </div>
@@ -30,6 +26,7 @@ import Spinner from "@/components/Spinner.vue";
 import card from "@/components/card.vue";
 import modal from "@/components/modal.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import { mapState } from "vuex";
 export default {
   name: "Home",
   components: {
@@ -63,7 +60,8 @@ export default {
       } else {
         return "bg-light";
       }
-    }
+    },
+    ...mapState(["query", "results"])
   }
 };
 </script>

@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
-import Dashboard from "@/views/Dashboard.vue";
+import List from "@/views/List.vue";
 import Anime from "@/views/Anime.vue";
 
 Vue.use(VueRouter);
@@ -13,19 +13,14 @@ const routes = [
     component: Home
   },
   {
-    path: "/dashboard",
-    name: "dashboard",
-    component: Dashboard
+    path: "/list",
+    name: "list",
+    component: List
   },
   {
     path: "/anime",
     name: "anime",
-    component: Anime,
-    props: function castProps(route) {
-      return {
-        id: Number(route.query.id)
-      };
-    }
+    component: Anime
   }
 ];
 

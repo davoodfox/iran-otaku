@@ -11,7 +11,7 @@
       "id": 21
     },
     {
-      "enTitle": "Death Note",
+      "enTitle": "Naruto: Shippuuden",
       "faTitle": "دفترچه مرگ",
       "id": 1535
     },
@@ -62,17 +62,17 @@
     },
     {
       "enTitle": "Boku no Hero Academia 2nd Season",
-      "faTitle": " مدرسه قهرمانانه من فصل دوم",
+      "faTitle": "مدرسه قهرمانانه من فصل ۲",
       "id": 33486
     },
     {
       "enTitle": "Boku no Hero Academia 3rd Season",
-      "faTitle": " مدرسه قهرمانانه من فصل سوم",
+      "faTitle": "مدرسه قهرمانانه من فصل ۳",
       "id": 36456
     },
     {
       "enTitle": "Boku no Hero Academia 4th Season",
-      "faTitle": " مدرسه قهرمانانه من فصل چهارم",
+      "faTitle": "مدرسه قهرمانانه من فصل ۴",
       "id": 38408
     },
     {
@@ -174,6 +174,31 @@
       "enTitle": "Naruto",
       "faTitle": "ناروتو",
       "id": 20
+    },
+    {
+      "enTitle": "Golden Boy",
+      "faTitle": "گلدن بوی",
+      "id": 268
+    },
+    {
+      "enTitle": "Toradora!",
+      "faTitle": "تورادورا",
+      "id": 4224
+    },
+    {
+      "enTitle": "Shingeki no Kyojin Season 3 Part 2",
+      "faTitle": "تایتان مهاجم فصل ۳ بخش ۲",
+      "id": 38524
+    },
+    {
+      "enTitle": "Shingeki no Kyojin Season 2",
+      "faTitle": "تایتان مهاجم فصل ۲",
+      "id": 25777
+    },
+    {
+      "enTitle": "Shingeki no Kyojin Season 3",
+      "faTitle": "تایتان مهاجم فصل ۳",
+      "id": 35760
     }
   ]
 }

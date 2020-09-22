@@ -5,16 +5,19 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-  props: {
-    id: {
-      type: Number
-    }
-  },
   data() {
-    return {
-      entry: this.$store.state.entries.find(entry => (entry.id = this.id))
-    };
+    return {};
+  },
+  computed: {
+    entry() {
+      console.log(this.$route.query.id);
+      let id = this.$route.query.id;
+      console.log(this.getEntryById(id));
+      return this.getEntryById(id);
+    },
+    ...mapGetters(["getEntryById"])
   }
 };
 </script>

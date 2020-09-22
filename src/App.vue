@@ -5,19 +5,16 @@
         <router-link to="/">خانه</router-link>
       </li>
       <li>
-        <router-link to="/dashboard">داشبورد</router-link>
+        <router-link to="/list">لیست انیمه‌ها</router-link>
       </li>
     </nav>
-    <router-view />
+    <!-- :key="$route.fullPath" => Reload components when the URL changes, including query parameters -->
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 
 <script>
-export default {
-  mounted() {
-    this.$store.dispatch("fetchEntries");
-  }
-};
+export default {};
 </script>
 
 <style lang="scss">

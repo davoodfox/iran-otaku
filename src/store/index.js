@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     ids: [],
     entries: [],
+    entriesCount: NaN,
     isLoading: false,
     query: "",
     results: []
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     },
     SET_LOADING(state, stat) {
       state.isLoading = stat;
+    },
+    SET_ENTRIES_COUNT(state, count) {
+      state.entriesCount = Number(count);
     },
     SET_RESULTS(state, response) {
       state.results = response.results;
@@ -77,9 +81,10 @@ export default new Vuex.Store({
         })
         .catch(error => error);
     },
-    fetchEntries({ state, commit }) {
+    fetchEntries({ state, commit }, { perPage, page }) {
       state.entries = [];
-      EntriesService.getEntries().then(res => {
+      EntriesService.getEntries(perPage, page).then(res => {
+        commit("SET_ENTRIES_COUNT", res.headers["x-total-count"]);
         commit("SET_IDS", res.data);
         commit("SET_ENTRIES", res.data);
       });
@@ -98,6 +103,11 @@ export default new Vuex.Store({
     },
     editEntry({ commit }, { id, updates }) {
       commit("EDIT_ENTRY", { id, updates });
+    }
+  },
+  getters: {
+    getEntryById: state => id => {
+      return state.entries.find(entry => entry.id == id);
     }
   },
   modules: {}
