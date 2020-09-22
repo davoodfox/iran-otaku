@@ -1,31 +1,86 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <nav id="nav">
+      <li>
+        <router-link to="/">خانه</router-link>
+      </li>
+      <li>
+        <router-link to="/dashboard">داشبورد</router-link>
+      </li>
+    </nav>
     <router-view />
   </div>
 </template>
 
+<script>
+export default {
+  mounted() {
+    this.$store.dispatch("fetchEntries");
+  }
+};
+</script>
+
 <style lang="scss">
+@font-face {
+  font-family: Shabnam;
+  src: url("../node_modules/shabnam-font/dist/Shabnam.eot");
+  src: url("../node_modules/shabnam-font/dist/Shabnam.eot?#iefix")
+      format("embedded-opentype"),
+    url("../node_modules/shabnam-font/dist/Shabnam.woff2") format("woff2"),
+    url("../node_modules/shabnam-font/dist/Shabnam.woff") format("woff"),
+    url("../node_modules/shabnam-font/dist/Shabnam.ttf") format("truetype");
+  font-weight: normal;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  direction: rtl;
+  font-family: "Shabnam", Helvetica, Arial, sans-serif;
+}
+input,
+textarea,
+button {
+  font-family: inherit;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: grid;
+  grid-template-rows: auto 1fr;
   text-align: center;
   color: #2c3e50;
+  margin: 0;
+  height: 100vh;
 }
 
 #nav {
   padding: 30px;
+  text-align: right;
+  background-color: #f09ae9;
+
+  + div {
+    padding: 30px;
+  }
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #9c2392;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #ffddfc;
+      border-bottom: 2px solid #ffddfc;
+    }
+  }
+  li {
+    list-style: none;
+
+    display: inline-block;
+    margin-left: 1rem;
+    a {
+      text-decoration: none;
     }
   }
 }
