@@ -1,6 +1,7 @@
 <template>
   <li>
     <div class="details-container">
+      <h4 v-if="isEntry(directive.mal_id)">{{ findEntry(directive.mal_id).faTitle }}</h4>
       <h4>{{ directive.title }}</h4>
       <p>
         {{ parseDate(directive.start_date).year }}
@@ -60,7 +61,9 @@ export default {
     isEntry(id) {
       return this.$store.state.ids.includes(id);
     },
-
+    findEntry(id) {
+      return this.$store.state.entries.find(entry => entry.id == id);
+    },
     addToEntries(id) {
       this.$store.dispatch("addEntry", id);
     },

@@ -96,11 +96,6 @@
       "id": 4898
     },
     {
-      "enTitle": "Bleach",
-      "faTitle": "بلیچ",
-      "id": 269
-    },
-    {
       "enTitle": "Gintama",
       "faTitle": "گینتاما",
       "id": 918
@@ -151,11 +146,6 @@
       "id": 37525
     },
     {
-      "enTitle": "Naruto",
-      "faTitle": "ناروتو",
-      "id": 20
-    },
-    {
       "enTitle": "Gyakkyou Burai Kaiji: Hakairoku-hen",
       "faTitle": "کایجی",
       "id": 10271
@@ -174,6 +164,16 @@
       "enTitle": "Ping Pong the Animation",
       "faTitle": "پینگ پونگ",
       "id": 22135
+    },
+    {
+      "enTitle": "Bleach",
+      "faTitle": "بلیچ",
+      "id": 269
+    },
+    {
+      "enTitle": "Naruto",
+      "faTitle": "ناروتو",
+      "id": 20
     }
   ]
 }
