@@ -1,6 +1,6 @@
 <template>
   <div :class="homeClass">
-    <form v-on:submit.prevent="sendQuery">
+    <form v-on:submit.prevent="sendQuery()">
       <label>
         جستجو کن:
         <input type="text" v-model="queryInputText" />
@@ -9,11 +9,15 @@
     </form>
     <div>
       <Spinner v-if="isLoading()" />
-      <p v-if="isLoading()">در حال جستجوی {{ query }}</p>
-      <template v-if="!isLoading() && results.length != 0">
-        <p>نتایج جستجو برای {{ query }}:</p>
+      <p v-if="isLoading()">در حال جستجوی {{ this.$store.state.query }}</p>
+      <template v-if="!isLoading() && this.$store.state.results.length != 0">
+        <p>نتایج جستجو برای {{ this.$store.state.query }}:</p>
         <ul>
-          <card v-for="result in results" :key="result.mal_id" :directive="result"></card>
+          <card
+            v-for="result in this.$store.state.results"
+            :key="result.mal_id"
+            :directive="result"
+          ></card>
         </ul>
       </template>
     </div>
@@ -22,7 +26,6 @@
 </template>
 
 <script>
-import jikanjs from "jikanjs";
 import Spinner from "@/components/Spinner.vue";
 import card from "@/components/card.vue";
 import modal from "@/components/modal.vue";
@@ -37,10 +40,7 @@ export default {
   },
   data() {
     return {
-      queryInputText: "",
-      query: "",
-      results: [],
-      homeClass: "bg-dark"
+      queryInputText: ""
     };
   },
   methods: {
@@ -49,20 +49,20 @@ export default {
         alert("You should type at least 3 letters");
         return;
       }
-      this.homeClass = "bg-light";
-      this.$store.dispatch("setLoading", true);
-      this.query = this.queryInputText;
+      this.$store.dispatch("fetchResults", this.queryInputText);
       this.queryInputText = "";
-      jikanjs
-        .search("anime", this.query, [1])
-        .then(res => {
-          this.results = res.results;
-          this.$store.dispatch("setLoading", false);
-        })
-        .catch(error => error);
     },
     isLoading() {
       return this.$store.state.isLoading;
+    }
+  },
+  computed: {
+    homeClass() {
+      if (this.$store.state.results.length < 1) {
+        return "bg-dark";
+      } else {
+        return "bg-light";
+      }
     }
   }
 };
@@ -71,6 +71,10 @@ export default {
 <style scoped lang="scss">
 .bg-dark {
   background-color: #333;
+
+  p {
+    color: #fff;
+  }
 
   label {
     color: #fff;

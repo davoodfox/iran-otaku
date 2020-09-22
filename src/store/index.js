@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import EntriesService from "@/services/EntriesService.js";
+import jikanjs from "jikanjs";
 
 Vue.use(Vuex);
 
@@ -8,17 +9,29 @@ export default new Vuex.Store({
   state: {
     ids: [],
     entries: [],
-    isLoading: false
+    isLoading: false,
+    query: "",
+    results: []
   },
   mutations: {
-    SET_IDS(state, entry) {
-      state.ids = [...state.ids, entry.id];
+    SET_IDS(state, entries) {
+      entries.forEach(entry => {
+        state.ids = [...state.ids, entry.id];
+      });
     },
     SET_LOADING(state, stat) {
       state.isLoading = stat;
     },
-    FETCH_ENTRIES(state, res) {
-      state.entries = [...state.entries, res];
+    SET_RESULTS(state, response) {
+      state.results = response.results;
+    },
+    SET_QUERY(state, query) {
+      state.query = query;
+    },
+    SET_ENTRIES(state, entries) {
+      entries.forEach(entry => {
+        state.entries = [...state.entries, entry];
+      });
     },
     ADD_ENTRY(state, entry) {
       state.entries = [...state.entries, entry];
@@ -53,17 +66,23 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    fetchResults({ commit }, query) {
+      commit("SET_QUERY", query);
+      commit("SET_LOADING", true);
+      jikanjs
+        .search("anime", query, [1])
+        .then(res => {
+          commit("SET_RESULTS", res);
+          commit("SET_LOADING", false);
+        })
+        .catch(error => error);
+    },
     fetchEntries({ state, commit }) {
       state.entries = [];
       EntriesService.getEntries().then(res => {
-        res.data.forEach(entry => {
-          commit("SET_IDS", entry);
-          commit("FETCH_ENTRIES", entry);
-        });
+        commit("SET_IDS", res.data);
+        commit("SET_ENTRIES", res.data);
       });
-    },
-    setLoading({ commit }, stat) {
-      commit("SET_LOADING", stat);
     },
     addEntry({ commit }, entry) {
       commit("ADD_ENTRY", entry);
