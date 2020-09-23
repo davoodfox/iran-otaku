@@ -14,6 +14,9 @@ export default {
   getEntries(perPage, page) {
     return apiClient.get("/entries?_limit=" + perPage + "&_page=" + page);
   },
+  getEntry(id) {
+    return apiClient.get(`/entries/${id}`);
+  },
   addEntry(entry) {
     return apiClient.post("/entries/", entry);
   },

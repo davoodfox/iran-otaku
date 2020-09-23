@@ -1,10 +1,13 @@
 <template>
   <li>
     <h3>{{ directive.faTitle }}</h3>
-    <router-link :to="{
+    <router-link
+      :to="{
         name: 'anime',
-        query: { id: directive.id }
-      }">برو</router-link>
+        params: { id: directive.id }
+      }"
+      >برو</router-link
+    >
     <form @submit.prevent>
       <label>
         تغییر نام:
@@ -16,17 +19,14 @@
         "
         :colors="{ background: '#33691e', text: '#ffffff' }"
         size="small"
-      >ویرایش</BaseButton>
+        >ویرایش</BaseButton
+      >
     </form>
   </li>
 </template>
 
 <script>
-import BaseButton from "@/components/BaseButton.vue";
 export default {
-  components: {
-    BaseButton
-  },
   props: {
     directive: {
       type: Object,

@@ -18,13 +18,19 @@ const routes = [
     component: List
   },
   {
-    path: "/anime",
+    path: "/anime/:id",
     name: "anime",
-    component: Anime
+    component: Anime,
+    props: function castProps(route) {
+      return {
+        id: Number(route.params.id)
+      };
+    }
   }
 ];
 
 const router = new VueRouter({
+  mode: "history",
   routes
 });
 

@@ -1,13 +1,15 @@
 <template>
   <li>
     <div class="details-container">
-      <h4 v-if="isEntry(directive.mal_id)">{{ findEntry(directive.mal_id).faTitle }}</h4>
+      <h4 v-if="isEntry(directive.mal_id)">
+        {{ findEntry(directive.mal_id).faTitle }}
+      </h4>
       <h4>{{ directive.title }}</h4>
       <p>
         {{ parseDate(directive.start_date).year }}
-        <template
-          v-if="directive.type == 'TV'"
-        >- {{ parseDate(directive.end_date).year }}</template>
+        <template v-if="directive.type == 'TV'"
+          >- {{ parseDate(directive.end_date).year }}</template
+        >
       </p>
       <p>{{ directive.type }}</p>
 
@@ -16,14 +18,16 @@
         @click.native="subEvent(directive)"
         :colors="{ background: '#33691e', text: '#ffffff' }"
         size="small"
-      >اضافه</BaseButton>
+        >اضافه</BaseButton
+      >
 
       <BaseButton
         v-else
         @click.native="deleteFromEntries(directive.mal_id)"
         :colors="{ background: '#bf360c', text: '#ffffff' }"
         size="small"
-      >حذف</BaseButton>
+        >حذف</BaseButton
+      >
     </div>
     <div class="image-container">
       <img :src="directive.image_url" :alt="directive.title" />
@@ -32,11 +36,7 @@
 </template>
 
 <script>
-import BaseButton from "@/components/BaseButton.vue";
 export default {
-  components: {
-    BaseButton
-  },
   props: {
     directive: {
       type: Object,

@@ -16,12 +16,14 @@
               @click.native="bundleEntry(entry, faTitle)"
               :colors="{ background: '#33691e', text: '#ffffff' }"
               size="medium"
-            >ثبت</BaseButton>
+              >ثبت</BaseButton
+            >
             <BaseButton
               @click.native="hideModal"
               :colors="{ background: '#bf360c', text: '#ffffff' }"
               size="medium"
-            >لغو</BaseButton>
+              >لغو</BaseButton
+            >
           </div>
         </form>
       </div>
@@ -30,11 +32,7 @@
 </template>
 
 <script>
-import BaseButton from "@/components/BaseButton.vue";
 export default {
-  components: {
-    BaseButton
-  },
   data() {
     return {
       showModal: false,

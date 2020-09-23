@@ -5,19 +5,19 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 export default {
-  data() {
-    return {};
+  props: {
+    id: {
+      type: Number,
+      required: true
+    }
+  },
+  mounted() {
+    this.$store.dispatch("fetchEntry", this.id);
   },
   computed: {
-    entry() {
-      console.log(this.$route.query.id);
-      let id = this.$route.query.id;
-      console.log(this.getEntryById(id));
-      return this.getEntryById(id);
-    },
-    ...mapGetters(["getEntryById"])
+    ...mapState(["entry"])
   }
 };
 </script>

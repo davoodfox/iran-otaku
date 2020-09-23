@@ -11,6 +11,7 @@
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
     "jikanjs": "^0.7.0",
+    "lodash": "^4.17.20",
     "shabnam-font": "^5.0.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",

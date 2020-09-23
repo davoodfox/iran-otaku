@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     ids: [],
     entries: [],
+    entry: {},
     entriesCount: NaN,
     isLoading: false,
     query: "",
@@ -36,6 +37,9 @@ export default new Vuex.Store({
       entries.forEach(entry => {
         state.entries = [...state.entries, entry];
       });
+    },
+    SET_ENTRY(state, response) {
+      state.entry = response.data;
     },
     ADD_ENTRY(state, entry) {
       state.entries = [...state.entries, entry];
@@ -87,6 +91,11 @@ export default new Vuex.Store({
         commit("SET_ENTRIES_COUNT", res.headers["x-total-count"]);
         commit("SET_IDS", res.data);
         commit("SET_ENTRIES", res.data);
+      });
+    },
+    fetchEntry({ commit }, id) {
+      EntriesService.getEntry(id).then(res => {
+        commit("SET_ENTRY", res);
       });
     },
     addEntry({ commit }, entry) {

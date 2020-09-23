@@ -5,7 +5,11 @@
         جستجو کن:
         <input type="text" v-model="queryInputText" />
       </label>
-      <BaseButton :colors="{ background: '#ffe78f', text: '#333333' }" size="large">جستجو</BaseButton>
+      <BaseButton
+        :colors="{ background: '#ffe78f', text: '#333333' }"
+        size="large"
+        >جستجو</BaseButton
+      >
     </form>
     <div>
       <Spinner v-if="isLoading()" />
@@ -13,7 +17,11 @@
       <template v-if="!isLoading() && results.length != 0">
         <p>نتایج جستجو برای {{ query }}:</p>
         <ul>
-          <card v-for="result in results" :key="result.mal_id" :directive="result"></card>
+          <card
+            v-for="result in results"
+            :key="result.mal_id"
+            :directive="result"
+          ></card>
         </ul>
       </template>
     </div>
@@ -22,18 +30,14 @@
 </template>
 
 <script>
-import Spinner from "@/components/Spinner.vue";
 import card from "@/components/card.vue";
 import modal from "@/components/modal.vue";
-import BaseButton from "@/components/BaseButton.vue";
 import { mapState } from "vuex";
 export default {
   name: "Home",
   components: {
-    Spinner,
     card,
-    modal,
-    BaseButton
+    modal
   },
   data() {
     return {
