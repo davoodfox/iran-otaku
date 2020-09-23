@@ -12,7 +12,7 @@
       >
     </form>
     <div>
-      <spinner v-if="isLoading()" />
+      <spinner v-if="isLoading()" :isWhite="isWhite" />
       <p v-if="isLoading()">در حال جستجوی {{ search.query }}</p>
       <template v-if="!isLoading() && search.results.length != 0">
         <p>نتایج جستجو برای {{ search.query }}:</p>
@@ -67,6 +67,9 @@ export default {
         return "bg-light";
       }
     },
+    isWhite() {
+      return this.homeClass == "bg-dark";
+    },
     ...mapState({
       search: state => state.search
     })
@@ -88,6 +91,10 @@ export default {
 }
 .bg-light {
   background-color: #ffc1fa22;
+
+  .lds-ellipsis div {
+    background-color: red;
+  }
 
   * {
     color: #333;

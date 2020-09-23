@@ -1,5 +1,5 @@
 <template>
-  <div class="lds-ellipsis">
+  <div class="lds-ellipsis" :style="compStyle">
     <div></div>
     <div></div>
     <div></div>
@@ -8,7 +8,27 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    isWhite: {
+      type: Boolean
+    }
+  },
+  computed: {
+    compColor() {
+      if (this.isWhite) {
+        return "#ffffff";
+      } else {
+        return "#000000";
+      }
+    },
+    compStyle() {
+      return {
+        "--color": this.compColor
+      };
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -24,7 +44,7 @@ export default {};
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--color);
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .lds-ellipsis div:nth-child(1) {
