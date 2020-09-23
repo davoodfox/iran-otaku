@@ -14,7 +14,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    this.$store.dispatch("fetchAllEntries");
+  }
+};
 </script>
 
 <style lang="scss">

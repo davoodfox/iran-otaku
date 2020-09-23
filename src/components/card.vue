@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   props: {
     directive: {
@@ -59,10 +60,10 @@ export default {
       };
     },
     isEntry(id) {
-      return this.$store.state.ids.includes(id);
+      return this.$store.getters.ids.includes(id);
     },
     findEntry(id) {
-      return this.$store.state.entries.find(entry => entry.id == id);
+      return this.entries.allEntries.find(entry => entry.id == id);
     },
     addToEntries(id) {
       this.$store.dispatch("addEntry", id);
@@ -70,6 +71,11 @@ export default {
     deleteFromEntries(id) {
       this.$store.dispatch("deleteEntry", id);
     }
+  },
+  computed: {
+    ...mapState({
+      entries: state => state.entries
+    })
   }
 };
 </script>

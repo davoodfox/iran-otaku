@@ -1,16 +1,14 @@
 import EntriesService from "@/services/EntriesService.js";
 
 const state = {
-  ids: [],
+  allEntries: [],
   entries: [],
   entriesCount: NaN
 };
 
 const mutations = {
-  SET_IDS(state, entries) {
-    entries.forEach(entry => {
-      state.ids = [...state.ids, entry.id];
-    });
+  SET_ALL_ENTRIES(state, entries) {
+    state.allEntries = entries;
   },
 
   SET_ENTRIES_COUNT(state, count) {
@@ -61,11 +59,14 @@ const actions = {
     state.entries = [];
     EntriesService.getEntries(perPage, page).then(res => {
       commit("SET_ENTRIES_COUNT", res.headers["x-total-count"]);
-      commit("SET_IDS", res.data);
       commit("SET_ENTRIES", res.data);
     });
   },
-
+  fetchAllEntries({ commit }) {
+    EntriesService.getAllEntries().then(res => {
+      commit("SET_ALL_ENTRIES", res.data);
+    });
+  },
   addEntry({ commit }, entry) {
     commit("ADD_ENTRY", entry);
     EntriesService.addEntry(entry).then(() => {
@@ -83,9 +84,16 @@ const actions = {
   }
 };
 
+const getters = {
+  ids: state => {
+    return state.allEntries.map(entry => entry.id);
+  }
+};
+
 export default {
   name: "entries",
   state,
   mutations,
-  actions
+  actions,
+  getters
 };

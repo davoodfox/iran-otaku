@@ -70,9 +70,6 @@ export default {
     ...mapState({
       search: state => state.search
     })
-  },
-  mounted() {
-    console.log(this.search);
   }
 };
 </script>

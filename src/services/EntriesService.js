@@ -14,6 +14,9 @@ export default {
   getEntries(perPage, page) {
     return apiClient.get("/entries?_limit=" + perPage + "&_page=" + page);
   },
+  getAllEntries() {
+    return apiClient.get("entries");
+  },
   getEntry(id) {
     return apiClient.get(`/entries/${id}`);
   },
