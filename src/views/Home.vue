@@ -12,13 +12,13 @@
       >
     </form>
     <div>
-      <Spinner v-if="isLoading()" />
-      <p v-if="isLoading()">در حال جستجوی {{ query }}</p>
-      <template v-if="!isLoading() && results.length != 0">
-        <p>نتایج جستجو برای {{ query }}:</p>
+      <spinner v-if="isLoading()" />
+      <p v-if="isLoading()">در حال جستجوی {{ search.query }}</p>
+      <template v-if="!isLoading() && search.results.length != 0">
+        <p>نتایج جستجو برای {{ search.query }}:</p>
         <ul>
           <card
-            v-for="result in results"
+            v-for="result in search.results"
             :key="result.mal_id"
             :directive="result"
           ></card>
@@ -32,12 +32,14 @@
 <script>
 import card from "@/components/card.vue";
 import modal from "@/components/modal.vue";
+import spinner from "@/components/spinner.vue";
 import { mapState } from "vuex";
 export default {
   name: "Home",
   components: {
     card,
-    modal
+    modal,
+    spinner
   },
   data() {
     return {
@@ -54,18 +56,23 @@ export default {
       this.queryInputText = "";
     },
     isLoading() {
-      return this.$store.state.isLoading;
+      return this.search.loading;
     }
   },
   computed: {
     homeClass() {
-      if (this.$store.state.results.length < 1) {
+      if (this.search.results.length < 1) {
         return "bg-dark";
       } else {
         return "bg-light";
       }
     },
-    ...mapState(["query", "results"])
+    ...mapState({
+      search: state => state.search
+    })
+  },
+  mounted() {
+    console.log(this.search);
   }
 };
 </script>

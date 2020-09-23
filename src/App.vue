@@ -2,7 +2,7 @@
   <div id="app">
     <nav id="nav">
       <li>
-        <router-link to="/">خانه</router-link>
+        <router-link to="/" exact>خانه</router-link>
       </li>
       <li>
         <router-link to="/list">لیست انیمه‌ها</router-link>
@@ -66,7 +66,7 @@ button {
     font-weight: bold;
     color: #9c2392;
 
-    &.router-link-exact-active {
+    &.router-link-active {
       color: #ffddfc;
       border-bottom: 2px solid #ffddfc;
     }

@@ -2,7 +2,11 @@
   <div>
     <h1>انیمه‌های اضافه شده:</h1>
     <ul>
-      <entry v-for="entry in entries" :key="entry.id" :directive="entry" />
+      <entry
+        v-for="entry in entries.entries"
+        :key="entry.id"
+        :directive="entry"
+      />
     </ul>
 
     <router-link
@@ -10,14 +14,16 @@
       v-if="page != 1"
       :to="{ name: 'list', query: { page: page - 1 } }"
       rel="prev"
-    >قبلی</router-link>
+      >قبلی</router-link
+    >
 
     <router-link
       class="nav-links"
-      v-if="entriesCount > page * 10"
+      v-if="entries.entriesCount > page * 10"
       :to="{ name: 'list', query: { page: page + 1 } }"
       rel="next"
-    >بعدی</router-link>
+      >بعدی</router-link
+    >
 
     <modal></modal>
   </div>
@@ -36,7 +42,9 @@ export default {
     page() {
       return Number(this.$route.query.page) || 1;
     },
-    ...mapState(["entries", "entriesCount"])
+    ...mapState({
+      entries: state => state.entries
+    })
   },
   mounted() {
     this.$store.dispatch("fetchEntries", { perPage: 10, page: this.page });

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ entry.faTitle }}</h1>
+    <h1>{{ entry.entry.faTitle }}</h1>
   </div>
 </template>
 
