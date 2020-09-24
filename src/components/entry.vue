@@ -40,9 +40,6 @@ export default {
     };
   },
   methods: {
-    editEntry({ id, updates }) {
-      this.editEntry({ id, updates });
-    },
     ...mapActions("entries", ["editEntry"])
   }
 };
