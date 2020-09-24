@@ -8,10 +8,15 @@
 export default {
   props: {
     colors: {
-      type: Object
+      type: Object,
+      default: () => ({
+        background: "initial",
+        text: "initial"
+      })
     },
     size: {
-      type: String
+      type: String,
+      default: "initial"
     },
     cursor: {
       type: String,

@@ -34,42 +34,102 @@ const mutations = {
       }
     });
   },
-  EDIT_ENTRY(state, { id, updates }) {
-    let targetEntry = state.entries.find(entry => entry.id == id);
+  EDIT_ENTRY(state, { targetEntry, updates }) {
     targetEntry.faTitle = updates.faTitle;
-    EntriesService.editEntry(targetEntry).then(res => {
-      console.log(res);
-    });
   }
 };
 
 const actions = {
-  fetchEntries({ state, commit }, { perPage, page }) {
+  fetchEntries({ dispatch, state, commit }, { perPage, page }) {
     state.entries = [];
-    EntriesService.getEntries(perPage, page).then(res => {
-      commit("SET_ENTRIES_COUNT", res.headers["x-total-count"]);
-      commit("SET_ENTRIES", res.data);
-    });
+    EntriesService.getEntries(perPage, page)
+      .then(res => {
+        commit("SET_ENTRIES_COUNT", res.headers["x-total-count"]);
+        commit("SET_ENTRIES", res.data);
+      })
+      .catch(error => {
+        const notification = {
+          type: "error",
+          message: "مشکلی در ارتباط پیش آمد: " + error
+        };
+        dispatch("notification/add", notification, { root: true });
+      });
   },
-  fetchAllEntries({ commit }) {
-    EntriesService.getAllEntries().then(res => {
-      commit("SET_ALL_ENTRIES", res.data);
-    });
+  fetchAllEntries({ dispatch, commit }) {
+    EntriesService.getAllEntries()
+      .then(res => {
+        commit("SET_ALL_ENTRIES", res.data);
+        const notification = {
+          type: "success",
+          message: "لیست انیمه‌ها به روز است."
+        };
+        dispatch("notification/add", notification, { root: true });
+      })
+      .catch(error => {
+        const notification = {
+          type: "error",
+          message: "مشکلی در ارتباط پیش آمد: " + error
+        };
+        dispatch("notification/add", notification, { root: true });
+      });
   },
-  addEntry({ commit }, entry) {
-    commit("ADD_ENTRY", entry);
-    EntriesService.addEntry(entry).then(() => {
-      console.log(entry.faTitle + " اضافه شد.");
-    });
+  addEntry({ dispatch, commit }, entry) {
+    EntriesService.addEntry(entry)
+      .then(() => {
+        commit("ADD_ENTRY", entry);
+        const notification = {
+          type: "success",
+          message: entry.faTitle + " اضافه شد."
+        };
+        dispatch("notification/add", notification, { root: true });
+      })
+      .catch(error => {
+        const notification = {
+          type: "error",
+          message: "مشکلی در ارتباط پیش آمد: " + error
+        };
+        dispatch("notification/add", notification, { root: true });
+        throw error;
+      });
   },
-  deleteEntry({ commit }, id) {
-    commit("DELETE_ENTRY", id);
-    EntriesService.deleteEntry(id).then(() => {
-      console.log(id + " Removed.");
-    });
+  deleteEntry({ dispatch, commit }, id) {
+    EntriesService.deleteEntry(id)
+      .then(() => {
+        commit("DELETE_ENTRY", id);
+        const notification = {
+          type: "success",
+          message: id + " Removed."
+        };
+        dispatch("notification/add", notification, { root: true });
+      })
+      .catch(error => {
+        const notification = {
+          type: "error",
+          message: "مشکلی در ارتباط پیش آمد: " + error
+        };
+        dispatch("notification/add", notification, { root: true });
+        throw error;
+      });
   },
-  editEntry({ commit }, { id, updates }) {
-    commit("EDIT_ENTRY", { id, updates });
+  editEntry({ dispatch, commit }, { id, updates }) {
+    let targetEntry = state.entries.find(entry => entry.id == id);
+    EntriesService.editEntry(targetEntry)
+      .then(() => {
+        commit("EDIT_ENTRY", { targetEntry, updates });
+        const notification = {
+          type: "success",
+          message: "تغییرات اعمال شد"
+        };
+        dispatch("notification/add", notification, { root: true });
+      })
+      .catch(error => {
+        const notification = {
+          type: "error",
+          message: "مشکلی در ارتباط پیش آمد: " + error
+        };
+        dispatch("notification/add", notification, { root: true });
+        throw error;
+      });
   }
 };
 

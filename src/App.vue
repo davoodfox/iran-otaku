@@ -10,17 +10,33 @@
     </nav>
     <!-- :key="$route.fullPath" => Reload components when the URL changes, including query parameters -->
     <router-view :key="$route.fullPath" />
+    <Notification
+      v-if="notification.notifications[0]"
+      :notification="{
+        ...notification.notifications[notification.notifications.length - 1]
+      }"
+    ></Notification>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
+import Notification from "@/components/Notification.vue";
 export default {
+  components: {
+    Notification
+  },
   methods: {
     ...mapActions("entries", ["fetchAllEntries"])
   },
+  computed: {
+    ...mapState({
+      notification: state => state.notification
+    })
+  },
   mounted() {
     this.fetchAllEntries();
+    console.log(this.notification.notifications.length);
   }
 };
 </script>

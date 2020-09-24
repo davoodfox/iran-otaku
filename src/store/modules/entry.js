@@ -11,10 +11,18 @@ const mutations = {
 };
 
 const actions = {
-  fetchEntry({ commit }, id) {
-    EntriesService.getEntry(id).then(res => {
-      commit("SET_ENTRY", res);
-    });
+  fetchEntry({ dispatch, commit }, id) {
+    EntriesService.getEntry(id)
+      .then(res => {
+        commit("SET_ENTRY", res);
+      })
+      .catch(error => {
+        const notification = {
+          type: "error",
+          message: "مشکلی در ارتباط پیش آمد: " + error
+        };
+        dispatch("notification/add", notification, { root: true });
+      });
   }
 };
 

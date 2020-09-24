@@ -19,7 +19,7 @@ const mutations = {
 };
 
 const actions = {
-  fetchResults({ commit }, query) {
+  fetchResults({ commit, dispatch }, query) {
     commit("SET_QUERY", query);
     commit("SET_LOADING", true);
     jikanjs
@@ -28,7 +28,13 @@ const actions = {
         commit("SET_RESULTS", res);
         commit("SET_LOADING", false);
       })
-      .catch(error => error);
+      .catch(error => {
+        const notification = {
+          type: "error",
+          message: "مشکلی در ارتباط پیش آمد: " + error
+        };
+        dispatch("notification/add", notification, { root: true });
+      });
   }
 };
 
