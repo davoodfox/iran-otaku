@@ -22,7 +22,7 @@
     },
     {
       "enTitle": "Hajime no Ippo",
-      "faTitle": "ایپو",
+      "faTitle": "هاجیمه نو ایپو",
       "id": 263
     },
     {
@@ -224,6 +224,16 @@
       "enTitle": "Naruto: Shippuuden",
       "faTitle": "ناروتو شیپودن",
       "id": 1735
+    },
+    {
+      "enTitle": "Hellsing",
+      "faTitle": "هلسینگ",
+      "id": 270
+    },
+    {
+      "enTitle": "Hellsing Ultimate",
+      "faTitle": "هلسینگ نهایی",
+      "id": 777
     }
   ]
 }

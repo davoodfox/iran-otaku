@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   props: {
     directive: {
@@ -40,8 +41,9 @@ export default {
   },
   methods: {
     editEntry({ id, updates }) {
-      this.$store.dispatch("editEntry", { id, updates });
-    }
+      this.editEntry({ id, updates });
+    },
+    ...mapActions("entries", ["editEntry"])
   }
 };
 </script>
