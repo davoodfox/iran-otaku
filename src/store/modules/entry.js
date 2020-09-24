@@ -20,6 +20,7 @@ const actions = {
 
 export default {
   name: "entry",
+  namespaced: true,
   state,
   mutations,
   actions

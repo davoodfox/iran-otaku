@@ -1,9 +1,15 @@
 <template>
   <li>
     <div class="details-container">
-      <h4 v-if="isEntry(directive.mal_id)">
-        {{ findEntry(directive.mal_id).faTitle }}
-      </h4>
+      <h3 v-if="isEntry(directive.mal_id)">
+        <router-link
+          :to="{
+            name: 'anime',
+            params: { id: directive.mal_id }
+          }"
+          >{{ findEntry(directive.mal_id).faTitle }}</router-link
+        >
+      </h3>
       <h4>{{ directive.title }}</h4>
       <p>
         {{ parseDate(directive.start_date).year }}
@@ -23,10 +29,11 @@
 
       <BaseButton
         v-else
-        @click.native="deleteFromEntries(directive.mal_id)"
-        :colors="{ background: '#bf360c', text: '#ffffff' }"
+        :colors="{ background: '#999', text: '#fff' }"
         size="small"
-        >حذف</BaseButton
+        cursor="not-allowed"
+        disabled
+        >در لیست</BaseButton
       >
     </div>
     <div class="image-container">
@@ -36,7 +43,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 export default {
   props: {
     directive: {
@@ -60,22 +67,17 @@ export default {
       };
     },
     isEntry(id) {
-      return this.$store.getters.ids.includes(id);
+      return this.ids.includes(id);
     },
     findEntry(id) {
       return this.entries.allEntries.find(entry => entry.id == id);
-    },
-    addToEntries(id) {
-      this.$store.dispatch("addEntry", id);
-    },
-    deleteFromEntries(id) {
-      this.$store.dispatch("deleteEntry", id);
     }
   },
   computed: {
     ...mapState({
       entries: state => state.entries
-    })
+    }),
+    ...mapGetters("entries", ["ids"])
   }
 };
 </script>
@@ -97,6 +99,14 @@ li {
     align-items: flex-end;
     width: 100%;
     padding: 1rem;
+  }
+
+  h3 {
+    align-self: flex-start;
+    padding-bottom: 1rem;
+    a {
+      text-decoration: none;
+    }
   }
 
   h4,

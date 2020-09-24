@@ -32,11 +32,14 @@
 <script>
 import modal from "@/components/modal.vue";
 import entry from "@/components/entry.vue";
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   components: {
     modal,
     entry
+  },
+  methods: {
+    ...mapActions("entries", ["fetchEntries"])
   },
   computed: {
     page() {
@@ -47,7 +50,7 @@ export default {
     })
   },
   mounted() {
-    this.$store.dispatch("fetchEntries", { perPage: 10, page: this.page });
+    this.fetchEntries({ perPage: 10, page: this.page });
   }
 };
 </script>

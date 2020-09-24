@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   props: {
     id: {
@@ -13,11 +13,14 @@ export default {
       required: true
     }
   },
-  mounted() {
-    this.$store.dispatch("fetchEntry", this.id);
+  methods: {
+    ...mapActions("entry", ["fetchEntry"])
   },
   computed: {
     ...mapState(["entry"])
+  },
+  mounted() {
+    this.fetchEntry(this.id);
   }
 };
 </script>

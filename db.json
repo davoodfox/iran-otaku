@@ -1,11 +1,6 @@
 {
   "entries": [
     {
-      "enTitle": "Naruto: Shippuuden",
-      "faTitle": "ناروتو شیپودن",
-      "id": 1735
-    },
-    {
       "enTitle": "One Piece",
       "faTitle": "وان پیس",
       "id": 21
@@ -171,11 +166,6 @@
       "id": 269
     },
     {
-      "enTitle": "Naruto",
-      "faTitle": "ناروتو",
-      "id": 20
-    },
-    {
       "enTitle": "Golden Boy",
       "faTitle": "گلدن بوی",
       "id": 268
@@ -224,6 +214,16 @@
       "enTitle": "One Punch Man 2nd Season",
       "faTitle": "مرد تک مشتی فصل ۲",
       "id": 34134
+    },
+    {
+      "enTitle": "Naruto",
+      "faTitle": "ناروتو",
+      "id": 20
+    },
+    {
+      "enTitle": "Naruto: Shippuuden",
+      "faTitle": "ناروتو شیپودن",
+      "id": 1735
     }
   ]
 }

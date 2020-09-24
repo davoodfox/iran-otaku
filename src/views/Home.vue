@@ -6,15 +6,20 @@
         <input type="text" v-model="queryInputText" />
       </label>
       <BaseButton
-        :colors="{ background: '#ffe78f', text: '#333333' }"
+        :colors="{
+          background: 'var(--accent-color)',
+          text: 'var(--primary-text-color)'
+        }"
         size="large"
         >جستجو</BaseButton
       >
     </form>
     <div>
-      <spinner v-if="isLoading()" :isWhite="isWhite" />
-      <p v-if="isLoading()">در حال جستجوی {{ search.query }}</p>
-      <template v-if="!isLoading() && search.results.length != 0">
+      <template v-if="search.loading">
+        <spinner :homeClass="homeClass" />
+        <p>در حال جستجوی {{ search.query }}</p>
+      </template>
+      <template v-if="!search.loading && search.results.length != 0">
         <p>نتایج جستجو برای {{ search.query }}:</p>
         <ul>
           <card
@@ -33,7 +38,7 @@
 import card from "@/components/card.vue";
 import modal from "@/components/modal.vue";
 import spinner from "@/components/spinner.vue";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "Home",
   components: {
@@ -52,12 +57,10 @@ export default {
         alert("You should type at least 3 letters");
         return;
       }
-      this.$store.dispatch("fetchResults", this.queryInputText);
+      this.fetchResults(this.queryInputText);
       this.queryInputText = "";
     },
-    isLoading() {
-      return this.search.loading;
-    }
+    ...mapActions("search", ["fetchResults"])
   },
   computed: {
     homeClass() {
@@ -66,9 +69,6 @@ export default {
       } else {
         return "bg-light";
       }
-    },
-    isWhite() {
-      return this.homeClass == "bg-dark";
     },
     ...mapState({
       search: state => state.search

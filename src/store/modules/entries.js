@@ -22,31 +22,20 @@ const mutations = {
   },
 
   ADD_ENTRY(state, entry) {
-    state.entries = [...state.entries, entry];
-    state.ids = [...state.ids, entry.id];
+    state.allEntries = [...state.allEntries, entry];
   },
   DELETE_ENTRY(state, targetId) {
-    state.ids.forEach((id, index) => {
-      if (id == targetId) {
-        state.ids = [
-          ...state.ids.slice(0, index),
-          ...state.ids.slice(index + 1)
-        ];
-      }
-    });
-    state.entries.forEach((entry, index) => {
+    state.allEntries.forEach((entry, index) => {
       if (entry.mal_id == targetId) {
-        state.entries = [
-          ...state.entries.slice(0, index),
-          ...state.entries.slice(index + 1)
+        state.allEntries = [
+          ...state.allEntries.slice(0, index),
+          ...state.allEntries.slice(index + 1)
         ];
       }
     });
   },
   EDIT_ENTRY(state, { id, updates }) {
-    console.log("id: " + id);
     let targetEntry = state.entries.find(entry => entry.id == id);
-    console.log("entry" + targetEntry.faTitle);
     targetEntry.faTitle = updates.faTitle;
     EntriesService.editEntry(targetEntry).then(res => {
       console.log(res);
@@ -92,6 +81,7 @@ const getters = {
 
 export default {
   name: "entries",
+  namespaced: true,
   state,
   mutations,
   actions,

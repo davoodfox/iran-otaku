@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -45,14 +46,15 @@ export default {
       this.showModal = false;
     },
     bundleEntry(entry, faTitle) {
-      this.$store.dispatch("addEntry", {
+      this.addEntry({
         enTitle: entry.title,
         faTitle,
         id: entry.mal_id
       });
       this.faTitle = "";
       this.showModal = false;
-    }
+    },
+    ...mapActions("entries", ["addEntry"])
   },
   mounted() {
     this.$root.$on("new-entry", directive => {

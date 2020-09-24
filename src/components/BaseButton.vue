@@ -12,6 +12,10 @@ export default {
     },
     size: {
       type: String
+    },
+    cursor: {
+      type: String,
+      default: "pointer"
     }
   },
   computed: {
@@ -48,7 +52,8 @@ export default {
         "--height": this.compSize.height,
         "--font-size": this.compSize.font,
         "--padding": this.compSize.padding,
-        "--border-radius": this.compSize.radius
+        "--border-radius": this.compSize.radius,
+        "--cursor": this.cursor
       };
     }
   }
@@ -62,7 +67,7 @@ button {
   padding: 0 var(--padding);
   border: none;
   border-radius: var(--border-radius);
-  cursor: pointer;
+  cursor: var(--cursor);
   background-color: var(--background-color);
   color: var(--color);
 }

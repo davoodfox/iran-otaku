@@ -10,21 +10,23 @@
 <script>
 export default {
   props: {
-    isWhite: {
-      type: Boolean
+    homeClass: {
+      type: String
     }
   },
   computed: {
     compColor() {
-      if (this.isWhite) {
+      if (this.homeClass == "bg-dark") {
         return "#ffffff";
-      } else {
+      } else if (this.homeClass == "bg-light") {
         return "#000000";
+      } else {
+        return "initial";
       }
     },
     compStyle() {
       return {
-        "--color": this.compColor
+        "--background-color": this.compColor
       };
     }
   }
@@ -44,7 +46,7 @@ export default {
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: var(--color);
+  background-color: var(--background-color);
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .lds-ellipsis div:nth-child(1) {

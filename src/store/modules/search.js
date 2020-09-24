@@ -33,6 +33,7 @@ const actions = {
 };
 
 export default {
+  namespaced: true,
   name: "search",
   state,
   mutations,

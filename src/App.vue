@@ -14,9 +14,13 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
+  methods: {
+    ...mapActions("entries", ["fetchAllEntries"])
+  },
   mounted() {
-    this.$store.dispatch("fetchAllEntries");
+    this.fetchAllEntries();
   }
 };
 </script>
@@ -55,12 +59,20 @@ button {
   color: #2c3e50;
   margin: 0;
   height: 100vh;
+  --primary-color-dark: #e64a19;
+  --primary-color: #ff5722;
+  --primary-color-light: #ffccbc;
+  --primary-color-text: #ffffff;
+  --accent-color: #cddc39;
+  --primary-text-color: #212121;
+  --secondary-text-color: #757575;
+  --divider-color: #bdbdbd;
 }
 
 #nav {
   padding: 30px;
   text-align: right;
-  background-color: #f09ae9;
+  background-color: var(--primary-color-dark);
 
   + div {
     padding: 30px;
@@ -68,11 +80,11 @@ button {
 
   a {
     font-weight: bold;
-    color: #9c2392;
+    color: var(--primary-text-color);
 
     &.router-link-active {
-      color: #ffddfc;
-      border-bottom: 2px solid #ffddfc;
+      color: var(--primary-color-text);
+      border-bottom: 2px solid var(--primary-color-text);
     }
   }
   li {
