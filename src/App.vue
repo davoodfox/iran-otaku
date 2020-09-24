@@ -36,7 +36,6 @@ export default {
   },
   mounted() {
     this.fetchAllEntries();
-    console.log(this.notification.notifications.length);
   }
 };
 </script>

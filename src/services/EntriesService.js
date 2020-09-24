@@ -11,9 +11,6 @@ const apiClient = axios.create({
 });
 
 export default {
-  getEntries(perPage, page) {
-    return apiClient.get("/entries?_limit=" + perPage + "&_page=" + page);
-  },
   getAllEntries() {
     return apiClient.get("entries");
   },
@@ -27,6 +24,6 @@ export default {
     return apiClient.delete(`/entries/${id}`, { id: id });
   },
   editEntry(entry) {
-    return apiClient.put(`/entries/${entry.id}`, { ...entry });
+    return apiClient.put(`/entries/${entry.id}`, entry);
   }
 };

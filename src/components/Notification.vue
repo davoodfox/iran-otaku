@@ -8,6 +8,11 @@
 <script>
 import { mapActions } from "vuex";
 export default {
+  data() {
+    return {
+      timeout: null
+    };
+  },
   props: {
     notification: {
       type: Object,
@@ -35,9 +40,12 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.remove(this.notification);
     }, 4500);
+  },
+  beforeDestroy() {
+    clearTimeout(this.timeout);
   }
 };
 </script>

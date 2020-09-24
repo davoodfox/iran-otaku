@@ -15,7 +15,7 @@
       </label>
       <BaseButton
         @click.native="
-          editEntry({ id: directive.id, updates: { faTitle: newTitle } })
+          editEntry({ target: directive, updates: { faTitle: newTitle } })
         "
         :colors="{ background: '#33691e', text: '#ffffff' }"
         size="small"

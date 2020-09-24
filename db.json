@@ -6,11 +6,6 @@
       "id": 21
     },
     {
-      "enTitle": "Naruto: Shippuuden",
-      "faTitle": "دفتر مرگ",
-      "id": 1535
-    },
-    {
       "enTitle": "One Punch Man",
       "faTitle": "مرد تک مشتی",
       "id": 30276
@@ -22,7 +17,7 @@
     },
     {
       "enTitle": "Hajime no Ippo",
-      "faTitle": "هاجیمه نو ایپو",
+      "faTitle": "ایپو",
       "id": 263
     },
     {
@@ -234,6 +229,11 @@
       "enTitle": "Hellsing Ultimate",
       "faTitle": "هلسینگ نهایی",
       "id": 777
+    },
+    {
+      "enTitle": "Death Note",
+      "faTitle": "دفترچه مرگ",
+      "id": 1535
     }
   ]
 }
