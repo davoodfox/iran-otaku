@@ -6,9 +6,9 @@
 npm install
 ```
 
-### Mocks the API
+### Start server
 ```
-json-server --watch db.json
+npm start
 ```
 
 ### Compiles and hot-reloads for development
