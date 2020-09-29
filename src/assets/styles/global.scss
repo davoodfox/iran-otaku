@@ -1,0 +1,34 @@
+@font-face {
+  font-family: Shabnam;
+  src: url("../node_modules/shabnam-font/dist/Shabnam.eot");
+  src: url("../node_modules/shabnam-font/dist/Shabnam.eot?#iefix")
+      format("embedded-opentype"),
+    url("../node_modules/shabnam-font/dist/Shabnam.woff2") format("woff2"),
+    url("../node_modules/shabnam-font/dist/Shabnam.woff") format("woff"),
+    url("../node_modules/shabnam-font/dist/Shabnam.ttf") format("truetype");
+  font-weight: normal;
+}
+:root {
+  --primary-color-dark: #e64a19;
+  --primary-color: #ff5722;
+  --primary-color-light: #ffccbc;
+  --primary-color-text: #ffffff;
+  --accent-color: #cddc39;
+  --primary-text-color: #212121;
+  --secondary-text-color: #757575;
+  --divider-color: #bdbdbd;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  direction: rtl;
+  font-family: "Shabnam", Helvetica, Arial, sans-serif;
+}
+input,
+textarea,
+button {
+  font-family: inherit;
+}

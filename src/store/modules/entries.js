@@ -1,37 +1,37 @@
 import EntriesService from "@/services/EntriesService.js";
 
 const state = {
-  allEntries: []
+  entries: []
 };
 
 const mutations = {
-  SET_ALL_ENTRIES(state, entries) {
-    state.allEntries = entries;
+  SET_ENTRIES(state, entries) {
+    state.entries = entries;
   },
 
   ADD_ENTRY(state, entry) {
-    state.allEntries = [...state.allEntries, entry];
+    state.entries = [...state.entries, entry];
   },
   DELETE_ENTRY(state, targetId) {
-    state.allEntries.forEach((entry, index) => {
+    state.entries.forEach((entry, index) => {
       if (entry.mal_id == targetId) {
-        state.allEntries = [
-          ...state.allEntries.slice(0, index),
-          ...state.allEntries.slice(index + 1)
+        state.entries = [
+          ...state.entries.slice(0, index),
+          ...state.entries.slice(index + 1)
         ];
       }
     });
   },
   EDIT_ENTRY(state, { index, updates }) {
-    state.allEntries[index].faTitle = updates.faTitle;
+    state.entries[index].faTitle = updates.faTitle;
   }
 };
 
 const actions = {
-  fetchAllEntries({ dispatch, commit }) {
-    EntriesService.getAllEntries()
+  fetchEntries({ dispatch, commit }) {
+    EntriesService.getEntries()
       .then(res => {
-        commit("SET_ALL_ENTRIES", res.data);
+        commit("SET_ENTRIES", res.data);
       })
       .catch(error => {
         const notification = {
@@ -43,7 +43,8 @@ const actions = {
   },
   addEntry({ dispatch, commit }, entry) {
     EntriesService.addEntry(entry)
-      .then(() => {
+      .then(res => {
+        console.log(res);
         commit("ADD_ENTRY", entry);
         const notification = {
           type: "success",
@@ -79,21 +80,22 @@ const actions = {
         throw error;
       });
   },
-  editEntry({ dispatch, commit, state }, { target, updates }) {
-    var index;
-    let oldName = target.faTitle;
-    state.allEntries.forEach((entry, i) => {
-      if (entry.id == target.id) {
-        index = i;
-      }
-    });
-
-    commit("EDIT_ENTRY", { index, updates });
-    EntriesService.editEntry(state.allEntries[index])
-      .then(res => {
+  editEntry({ dispatch, commit, state }, { id, updates }) {
+    EntriesService.editEntry({ id, updates })
+      .then(({ data }) => {
+        let index;
+        let oldName;
+        state.entries.forEach((entry, i) => {
+          if (entry.id == id) {
+            index = i;
+            oldName = entry.faTitle;
+          }
+        });
+        commit("EDIT_ENTRY", { index, updates });
+        console.log(data);
         const notification = {
           type: "success",
-          message: `${oldName} به ${res.data.faTitle} تغییر یافت.`
+          message: `${oldName} به ${data.faTitle} تغییر یافت.`
         };
         dispatch("notification/add", notification, { root: true });
       })
@@ -110,7 +112,7 @@ const actions = {
 
 const getters = {
   ids: state => {
-    return state.allEntries.map(entry => entry.id);
+    return state.entries.map(entry => entry.id);
   }
 };
 

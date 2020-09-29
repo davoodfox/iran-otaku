@@ -1,8 +1,10 @@
 <template>
-  <div :style="style">
-    <p>{{ notification.message }}</p>
-    <BaseButton @click.native="remove(notification)">✘</BaseButton>
-  </div>
+  <transition name="fade" appear>
+    <div :style="style">
+      <p>{{ notification.message }}</p>
+      <BaseButton @click.native="remove(notification)">✘</BaseButton>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -65,5 +67,20 @@ div {
     top: 3px;
     right: 3px;
   }
+}
+.fade-enter,
+.fade-leave-to {
+  left: -220px;
+}
+.fade-enter-to,
+.fade-leave {
+  left: 0;
+}
+.fade-enter-active {
+  transition: left 0.5s ease-out;
+}
+
+.fade-leave-active {
+  transition: left 0.5s ease-out;
 }
 </style>

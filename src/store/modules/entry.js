@@ -5,24 +5,17 @@ const state = {
 };
 
 const mutations = {
-  SET_ENTRY(state, response) {
-    state.entry = response.data;
+  SET_ENTRY(state, data) {
+    state.entry = data;
   }
 };
 
 const actions = {
-  fetchEntry({ dispatch, commit }, id) {
-    EntriesService.getEntry(id)
-      .then(res => {
-        commit("SET_ENTRY", res);
-      })
-      .catch(error => {
-        const notification = {
-          type: "error",
-          message: "مشکلی در ارتباط پیش آمد: " + error
-        };
-        dispatch("notification/add", notification, { root: true });
-      });
+  fetchEntry({ commit }, id) {
+    EntriesService.getEntry(id).then(({ data }) => {
+      console.log(data);
+      commit("SET_ENTRY", data);
+    });
   }
 };
 

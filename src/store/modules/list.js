@@ -1,5 +1,5 @@
 const state = {
-  perPage: 10,
+  perPage: 20,
   page: 1
 };
 
@@ -17,13 +17,13 @@ const actions = {
 
 const getters = {
   chunk: (state, getters, rootState) => {
-    return rootState.entries.allEntries.slice(
+    return rootState.entries.entries.slice(
       (state.page - 1) * state.perPage,
       state.page * state.perPage
     );
   },
   count: (state, getters, rootState) => {
-    return rootState.entries.allEntries.length;
+    return rootState.entries.entries.length;
   }
 };
 

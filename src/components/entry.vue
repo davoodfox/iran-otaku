@@ -14,9 +14,7 @@
         <input type="text" v-model="newTitle" />
       </label>
       <BaseButton
-        @click.native="
-          editEntry({ target: directive, updates: { faTitle: newTitle } })
-        "
+        @click.native="submit(directive.id)"
         :colors="{ background: '#33691e', text: '#ffffff' }"
         size="small"
         >ویرایش</BaseButton
@@ -40,6 +38,9 @@ export default {
     };
   },
   methods: {
+    submit(id) {
+      this.editEntry({ id, updates: { faTitle: this.newTitle } });
+    },
     ...mapActions("entries", ["editEntry"])
   }
 };

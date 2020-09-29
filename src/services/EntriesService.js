@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "http://localhost:3000/api/entries",
   withCredentials: false,
   headers: {
     Accept: "application/json",
@@ -11,19 +11,19 @@ const apiClient = axios.create({
 });
 
 export default {
-  getAllEntries() {
-    return apiClient.get("entries");
+  getEntries() {
+    return apiClient.get("/all");
   },
   getEntry(id) {
-    return apiClient.get(`/entries/${id}`);
+    return apiClient.get(`/entry/${id}`);
   },
   addEntry(entry) {
-    return apiClient.post("/entries/", entry);
+    return apiClient.post("/entry", entry);
   },
   deleteEntry(id) {
-    return apiClient.delete(`/entries/${id}`, { id: id });
+    return apiClient.delete("/entry", id);
   },
-  editEntry(entry) {
-    return apiClient.put(`/entries/${entry.id}`, entry);
+  editEntry({ id, updates }) {
+    return apiClient.put("/entry", { id, updates });
   }
 };

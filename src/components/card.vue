@@ -70,7 +70,7 @@ export default {
       return this.ids.includes(id);
     },
     findEntry(id) {
-      return this.entries.allEntries.find(entry => entry.id == id);
+      return this.entries.entries.find(entry => entry.id == id);
     }
   },
   computed: {
