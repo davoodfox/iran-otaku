@@ -1,14 +1,24 @@
 <template>
   <nav>
-    <li>
-      <router-link to="/" exact>خانه</router-link>
-    </li>
-    <li>
-      <router-link to="/list">لیست انیمه‌ها</router-link>
-    </li>
-    <li>
-      <router-link to="/search" exact>جستجو</router-link>
-    </li>
+    <ul>
+      <li>
+        <router-link to="/" exact>خانه</router-link>
+      </li>
+      <li>
+        <router-link to="/list">لیست انیمه‌ها</router-link>
+      </li>
+      <li>
+        <router-link to="/search" exact>جستجو</router-link>
+      </li>
+    </ul>
+    <ul>
+      <li>
+        <router-link to="/login" exact>ورود</router-link>
+      </li>
+      <li>
+        <router-link to="/register">ثبت نام</router-link>
+      </li>
+    </ul>
   </nav>
 </template>
 
@@ -21,6 +31,8 @@ nav {
   padding: 30px;
   text-align: right;
   background-color: var(--primary-color-dark);
+  display: flex;
+  justify-content: space-between;
 
   + div {
     padding: 30px;

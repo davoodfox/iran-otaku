@@ -1,20 +1,21 @@
 <template>
   <div>
+    <h2>ثبت نام</h2>
     <form @submit.prevent="submit">
       <label for="name">
         نام:
+        <input v-model="name" type="text" name="name" value />
       </label>
-      <input v-model="name" type="text" name="name" value />
 
       <label for="email">
         ایمیل:
+        <input v-model="email" type="email" name="email" value />
       </label>
-      <input v-model="email" type="email" name="email" value />
 
       <label for="password">
         رمز عبور:
+        <input v-model="password" type="password" name="password" value />
       </label>
-      <input v-model="password" type="password" name="password" value />
 
       <button type="submit" name="button">
         ثبت نام
@@ -51,4 +52,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: min-content;
+  margin: auto;
+  text-align: right;
+}
+</style>
