@@ -20,8 +20,10 @@ export default {
   getEntry(id) {
     return apiClient.get(`/entry/${id}`);
   },
-  addEntry(entry) {
-    return apiClient.post("/entry", entry);
+  addEntry({ entry, token }) {
+    return apiClient.post("/entry", entry, {
+      headers: { "auth-token": token }
+    });
   },
   deleteEntry(id) {
     return apiClient.delete("/entry", id);

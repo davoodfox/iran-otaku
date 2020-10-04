@@ -41,8 +41,9 @@ const actions = {
         dispatch("notification/add", notification, { root: true });
       });
   },
-  addEntry({ dispatch, commit }, entry) {
-    EntriesService.addEntry(entry)
+  addEntry({ dispatch, commit, rootState }, entry) {
+    const token = rootState.user.token;
+    EntriesService.addEntry({ entry, token })
       .then(res => {
         console.log(res);
         commit("ADD_ENTRY", entry);

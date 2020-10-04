@@ -19,13 +19,19 @@
         <router-link to="/register">ثبت نام</router-link>
       </li>
     </ul>
+    <ul v-if="isLoggedIn">
+      <li>{{ user.name }}</li>
+    </ul>
   </nav>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 export default {
   computed: {
+    ...mapState({
+      user: state => state.user.user
+    }),
     ...mapGetters("user", ["isLoggedIn"])
   }
 };
