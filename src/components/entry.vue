@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 export default {
   props: {
     directive: {
@@ -58,7 +58,8 @@ export default {
   computed: {
     ...mapState({
       user: state => state.user
-    })
+    }),
+    ...mapGetters("user", ["isLoggedIn"])
   }
 };
 </script>
