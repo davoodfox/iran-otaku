@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Entry = require("../models/Entry");
+const verify = require("./verify-token");
 
 // Fetch All Entries
 router.get("/all", async (req, res) => {
@@ -12,7 +13,7 @@ router.get("/entry/:id", async (req, res) => {
 });
 
 // Add Entry
-router.post("/entry", async (req, res) => {
+router.post("/entry", verify, async (req, res) => {
   const entry = new Entry({
     enTitle: req.body.enTitle,
     faTitle: req.body.faTitle,
@@ -27,7 +28,7 @@ router.post("/entry", async (req, res) => {
 });
 
 // Edit Entry
-router.put("/entry", async (req, res) => {
+router.put("/entry", verify, async (req, res) => {
   try {
     let newEntry = await Entry.findOneAndUpdate(
       { id: req.body.id },

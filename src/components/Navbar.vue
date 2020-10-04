@@ -11,7 +11,7 @@
         <router-link to="/search" exact>جستجو</router-link>
       </li>
     </ul>
-    <ul>
+    <ul v-if="!isLoggedIn">
       <li>
         <router-link to="/login" exact>ورود</router-link>
       </li>
@@ -23,7 +23,12 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    ...mapGetters("user", ["isLoggedIn"])
+  }
+};
 </script>
 
 <style lang="scss">

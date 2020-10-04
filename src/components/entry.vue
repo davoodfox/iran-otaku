@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   props: {
     directive: {
@@ -39,9 +39,17 @@ export default {
   },
   methods: {
     submit(id) {
-      this.editEntry({ id, updates: { faTitle: this.newTitle } });
+      this.editEntry({
+        id,
+        updates: { faTitle: this.newTitle }
+      });
     },
     ...mapActions("entries", ["editEntry"])
+  },
+  computed: {
+    ...mapState({
+      user: state => state.user
+    })
   }
 };
 </script>

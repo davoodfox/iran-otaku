@@ -24,24 +24,24 @@
 </template>
 
 <script>
-import AuthService from "@/services/AuthService.js";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      name: "",
       email: "",
       password: ""
     };
   },
   methods: {
     submit() {
-      AuthService.login({
+      this.login({
         email: this.email,
         password: this.password
-      }).then(({ data }) => {
-        console.log(data);
+      }).then(() => {
+        this.$router.push({ name: "list" });
       });
-    }
+    },
+    ...mapActions("user", ["login"])
   }
 };
 </script>

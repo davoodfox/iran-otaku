@@ -6,6 +6,7 @@ import entries from "@/store/modules/entries.js";
 import search from "@/store/modules/search.js";
 import notification from "@/store/modules/notification.js";
 import list from "@/store/modules/list.js";
+import user from "@/store/modules/user.js";
 
 Vue.use(Vuex);
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     entries,
     search,
     notification,
-    list
+    list,
+    user
   }
 });

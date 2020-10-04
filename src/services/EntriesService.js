@@ -1,12 +1,15 @@
 import axios from "axios";
 
+const headers = {
+  "cache-control": "no-cache",
+  Accept: "application/json",
+  "Content-Type": "application/json"
+};
+
 const apiClient = axios.create({
   baseURL: "http://localhost:3000/api/entries",
   withCredentials: false,
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json"
-  },
+  headers: headers,
   timeout: 10000
 });
 
@@ -23,7 +26,11 @@ export default {
   deleteEntry(id) {
     return apiClient.delete("/entry", id);
   },
-  editEntry({ id, updates }) {
-    return apiClient.put("/entry", { id, updates });
+  editEntry({ id, updates, token }) {
+    return apiClient.put(
+      "/entry",
+      { id, updates },
+      { headers: { "auth-token": token } }
+    );
   }
 };

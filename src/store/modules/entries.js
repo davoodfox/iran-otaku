@@ -80,8 +80,9 @@ const actions = {
         throw error;
       });
   },
-  editEntry({ dispatch, commit, state }, { id, updates }) {
-    EntriesService.editEntry({ id, updates })
+  editEntry({ dispatch, commit, state, rootState }, { id, updates }) {
+    const token = rootState.user.token;
+    EntriesService.editEntry({ id, updates, token })
       .then(({ data }) => {
         let index;
         let oldName;
@@ -92,7 +93,6 @@ const actions = {
           }
         });
         commit("EDIT_ENTRY", { index, updates });
-        console.log(data);
         const notification = {
           type: "success",
           message: `${oldName} به ${data.faTitle} تغییر یافت.`
