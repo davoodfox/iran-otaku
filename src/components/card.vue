@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 export default {
   props: {
     directive: {
@@ -53,6 +53,14 @@ export default {
   },
   methods: {
     subEvent(directive) {
+      if (!this.isLoggedIn) {
+        const notification = {
+          type: "message",
+          message: "برای این کار نیاز به عضویت دارید."
+        };
+        this.add(notification);
+        return;
+      }
       this.$root.$emit("new-entry", directive);
     },
     parseDate(date) {
@@ -71,13 +79,15 @@ export default {
     },
     findEntry(id) {
       return this.entries.entries.find(entry => entry.id == id);
-    }
+    },
+    ...mapActions("notification", ["add"])
   },
   computed: {
     ...mapState({
       entries: state => state.entries
     }),
-    ...mapGetters("entries", ["ids"])
+    ...mapGetters("entries", ["ids"]),
+    ...mapGetters("user", ["isLoggedIn"])
   }
 };
 </script>

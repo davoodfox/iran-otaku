@@ -29,6 +29,9 @@ app.use(cors());
 app.use("/api/user", authRoute);
 app.use("/api/entries", entriesRoute);
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the API");
+});
 app.listen(process.env.PORT || 3000, () => {
   console.log("server is running");
 });

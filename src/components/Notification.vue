@@ -34,6 +34,10 @@ export default {
         return {
           "--background-color": "red"
         };
+      } else if (this.notification.type == "message") {
+        return {
+          "--background-color": "grey"
+        };
       } else {
         return {
           "--background-color": "initial"
@@ -70,7 +74,7 @@ div {
 }
 .fade-enter,
 .fade-leave-to {
-  left: -220px;
+  left: -420px;
 }
 .fade-enter-to,
 .fade-leave {

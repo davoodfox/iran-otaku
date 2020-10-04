@@ -39,12 +39,21 @@ export default {
   },
   methods: {
     submit(id) {
+      if (!this.isLoggedIn) {
+        const notification = {
+          type: "message",
+          message: "برای این کار نیاز به عضویت دارید."
+        };
+        this.add(notification);
+        return;
+      }
       this.editEntry({
         id,
         updates: { faTitle: this.newTitle }
       });
     },
-    ...mapActions("entries", ["editEntry"])
+    ...mapActions("entries", ["editEntry"]),
+    ...mapActions("notification", ["add"])
   },
   computed: {
     ...mapState({
