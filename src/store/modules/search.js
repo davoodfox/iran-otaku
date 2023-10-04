@@ -1,5 +1,3 @@
-import jikanjs from "jikanjs";
-
 const state = {
   loading: false,
   query: "",
@@ -11,7 +9,7 @@ const mutations = {
     state.loading = stat;
   },
   SET_RESULTS(state, response) {
-    state.results = response.results;
+    state.results = response;
   },
   SET_QUERY(state, query) {
     state.query = query;
@@ -19,22 +17,21 @@ const mutations = {
 };
 
 const actions = {
-  fetchResults({ commit, dispatch }, query) {
+  async fetchResults({ commit, dispatch }, query) {
     commit("SET_QUERY", query);
     commit("SET_LOADING", true);
-    jikanjs
-      .search("anime", query, [1])
-      .then(res => {
-        commit("SET_RESULTS", res);
-        commit("SET_LOADING", false);
-      })
-      .catch(error => {
-        const notification = {
-          type: "error",
-          message: "مشکلی در ارتباط پیش آمد: " + error
-        };
-        dispatch("notification/add", notification, { root: true });
-      });
+    try {
+      const res = await fetch("https://api.jikan.moe/v4/anime?q=" + query);
+      const data = await res.json();
+      commit("SET_RESULTS", data.data);
+      commit("SET_LOADING", false);
+    } catch (error) {
+      const notification = {
+        type: "error",
+        message: "مشکلی در ارتباط پیش آمد: " + error
+      };
+      dispatch("notification/add", notification, { root: true });
+    }
   }
 };
 

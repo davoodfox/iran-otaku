@@ -37,7 +37,7 @@
       >
     </div>
     <div class="image-container">
-      <img :src="directive.image_url" :alt="directive.title" />
+      <img :src="directive.images.jpg.image_url" :alt="directive.title" />
     </div>
   </li>
 </template>
